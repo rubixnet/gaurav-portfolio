@@ -10,3 +10,7 @@
 @media(max-width:700px){.island-app .action-prompt{min-height:48px;padding:12px 14px!important;gap:8px;font-size:13px;max-width:calc(100% - 138px)}.island-app .action-prompt kbd{display:none}.island-app .action-prompt .action-label{display:block}.island-app .action-prompt svg{width:16px;height:16px}.island-app .seat-button,.island-app .interaction-button{left:auto;right:16px;bottom:calc(103px + env(safe-area-inset-bottom));transform:none}.island-dialog p{font-size:15px}.island-dialog .contact-monogram{width:76px;height:76px;font-size:58px;margin:12px auto 20px}.island-dialog{border-radius:12px}.balcony-project-links{bottom:calc(167px + env(safe-area-inset-bottom))}}
 @media(max-height:500px) and (max-width:900px){.island-app .seat-button,.island-app .interaction-button{bottom:85px;left:auto;right:20px;transform:none}}
 @media(prefers-reduced-motion:reduce){.island-app .action-prompt,.destination-list button,.controls-trigger{transition:none}}
+
+/* Symbol-only portfolio identity. */
+.island-brand .brand-symbol{display:block;width:52px;height:52px;object-fit:contain;flex-shrink:0}
+@media(max-width:600px){.island-brand .brand-symbol{width:44px;height:44px}}

@@ -120,7 +120,7 @@ export default function IslandExperience() {
    <div className="cinema-wash" aria-hidden="true"/>
    <WorldAudio enabled={sound} state={state}/>
    <header className="island-header">
-     <a className="island-brand" href="#" onClick={e=>{e.preventDefault();setStarted(false);setSeated(false);setDeskSeated(false);setPanel(null);state.current.seated=false;state.current.deskSeated=false;state.current.keys.clear();state.current.joystick=[0,0];state.current.path=[];state.current.position=[0,31];state.current.floor=0;}} aria-label="Return to island welcome"><span className="brand-seal">G.</span><span>GAURAV’S WORLD<small>A PLACE TO EXPLORE</small></span></a>
+     <a className="island-brand" href="#" onClick={e=>{e.preventDefault();setStarted(false);setSeated(false);setDeskSeated(false);setPanel(null);state.current.seated=false;state.current.deskSeated=false;state.current.keys.clear();state.current.joystick=[0,0];state.current.path=[];state.current.position=[0,31];state.current.floor=0;}} aria-label="Return to island welcome"><img className="brand-symbol" src="/branding/gaurav-symbol.png" width={52} height={52} alt="Gaurav logo" /></a>
      <nav aria-label="Main navigation"><button className="map-trigger" title="Open the map and teleport to a location (M)" onClick={()=>setPanel('map')}>Map <span>⌖</span></button><a href={portfolioLinks.github} target="_blank" rel="noreferrer">GitHub ↗</a><button className="controls-trigger" onClick={()=>setPanel('help')} aria-label="Open controls" title="View movement controls and keyboard shortcuts">?</button></nav>
    </header>
 
