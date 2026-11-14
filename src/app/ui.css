@@ -67,12 +67,15 @@
  .island-app .joystick{bottom:calc(88px + env(safe-area-inset-bottom))}
 }
 
-/* Keep mobile header controls optically aligned and equally sized. */
+/* Mobile navigation: one aligned row, with consistent touch targets. */
 @media(max-width:700px),(pointer:coarse) and (max-height:500px) and (max-width:900px){
- .island-app .island-header{padding:calc(14px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) 14px calc(16px + env(safe-area-inset-left));align-items:center}
- .island-header .island-brand{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;flex:none;overflow:hidden;border-radius:50%;gap:0}
- .island-header .island-brand .brand-symbol{width:56px;height:56px;max-width:none;transform:none}
- .island-app .island-header nav{height:44px;min-height:44px;display:flex;align-items:center;padding:0;margin:0;border:0;background:transparent}
- .island-app .island-header .controls-trigger{display:grid;place-items:center;box-sizing:border-box;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border-radius:50%;font-size:21px;line-height:1;margin:0}
- .island-app .island-header .map-trigger,.is-seated .island-header .map-trigger{top:calc(70px + env(safe-area-inset-top))!important;right:calc(16px + env(safe-area-inset-right));margin:0}
+ .island-app .island-header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:calc(16px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) 0 calc(16px + env(safe-area-inset-left));pointer-events:none}
+ .island-app .island-header .island-brand{position:relative;display:block;box-sizing:border-box;width:48px;height:48px;min-width:48px;min-height:48px;flex:0 0 48px;overflow:hidden;border-radius:50%;pointer-events:auto;box-shadow:0 2px 10px #112b3626}
+ .island-app .island-header .island-brand .brand-symbol{position:absolute;left:50%;top:50%;width:61px;height:61px;max-width:none;transform:translate(-50%,-50%);object-fit:contain}
+ .island-app .island-header nav{display:flex;align-items:center;gap:8px;height:48px;min-height:48px;margin:0;padding:0;border:0;border-radius:0;background:transparent;pointer-events:auto}
+ .island-app .island-header .controls-trigger{display:grid;place-items:center;box-sizing:border-box;flex:0 0 48px;width:48px;height:48px;min-width:48px;min-height:48px;padding:0!important;margin:0;border:1px solid #e3c49c80;border-radius:50%;background:#203740ed;color:#fff0d7;font:22px/1 Georgia,serif;box-shadow:0 2px 10px #112b3626;touch-action:manipulation}
+ .island-app .island-header .map-trigger,.island-app.is-seated .island-header .map-trigger{position:static;inset:auto!important;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;min-height:48px;height:48px;min-width:88px;padding:0 16px!important;margin:0;border:1px solid #f4d4b640;border-radius:24px;background:#f4d4b6!important;color:#293f4c;font:600 13px/1 Arial,sans-serif;box-shadow:0 2px 10px #112b3626;touch-action:manipulation}
+ .island-app .island-header .map-trigger span{margin:0;font-size:18px;line-height:1}
+ .island-app .place-caption{top:calc(80px + env(safe-area-inset-top));max-width:calc(100% - 32px)}
+ .island-app .island-header a:focus-visible,.island-app .island-header button:focus-visible{outline:3px solid #fff0d7;outline-offset:3px}
 }
