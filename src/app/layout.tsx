@@ -4,6 +4,7 @@ import './island.css';
 import './portfolio-panels.css';
 import './sunset.css';
 import './ui.css';
+import './explore-navigation.css';
 
 export const metadata: Metadata = {
   title: 'Gaurav’s World',

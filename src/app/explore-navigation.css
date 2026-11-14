@@ -1,0 +1,32 @@
+/* Two persistent controls. Scene, camera and landing graphics are untouched. */
+.island-header nav.explore-navigation{position:fixed;top:calc(24px + env(safe-area-inset-top));right:calc(24px + env(safe-area-inset-right));display:flex;flex-direction:column;align-items:center;gap:8px;width:44px;height:auto;min-height:0;padding:0;margin:0;background:transparent;border:0;border-radius:0;backdrop-filter:none;pointer-events:auto}
+.island-header .explore-navigation .explore-nav-button{position:relative;display:grid;place-items:center;box-sizing:border-box;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;margin:0;padding:0;border:1px solid #ead3ac80;border-radius:8px;background:#203740ed;color:#fff0d7;box-shadow:0 3px 12px #102a3620;touch-action:manipulation;transition:background-color 140ms ease-out}
+.island-header .explore-navigation .explore-nav-button svg{display:block;pointer-events:none}
+.island-header .explore-navigation .explore-nav-button:hover{background:#39545c}
+.island-header .explore-navigation .explore-nav-button:focus-visible{outline:3px solid #ffe0a3;outline-offset:3px}
+.island-header .explore-navigation .explore-nav-button[aria-expanded=true]{background:#f4d4b6;color:#203740}
+.island-header .explore-nav-tooltip{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);margin:0;padding:7px 10px;white-space:nowrap;border-radius:5px;background:#203740;color:#fff0d7;font:500 11px/1.4 'Segoe UI',Arial,sans-serif;opacity:0;visibility:hidden;pointer-events:none}
+@media(hover:hover){.explore-nav-button:hover .explore-nav-tooltip{opacity:1;visibility:visible}}
+.explore-nav-button:focus-visible .explore-nav-tooltip{opacity:1;visibility:visible}
+.explore-menu-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;margin:10px 0 22px}
+.island-dialog .explore-menu-links button{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:12px 0;border-bottom:1px solid #344c5326;text-align:left;color:#344c53;font:500 15px/1.4 'Segoe UI',Arial,sans-serif}
+.island-dialog .explore-menu-links button:hover{color:#965a3d}
+.island-dialog .explore-controls-link{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;width:100%;padding:12px 14px;background:#344c530a;border:1px solid #344c5320;border-radius:6px;color:#344c53;font-size:13px;text-align:left}
+.explore-settings{min-width:0;border:0;border-top:1px solid #344c5326;margin:32px 0 0;padding:12px 0 0}
+.explore-settings legend{padding:0 12px 0 0;color:#66736b;font:600 10px/1.5 'Segoe UI',Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.explore-setting{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:76px;border-bottom:1px solid #344c5317}
+.explore-setting label{display:block;color:#344c53;font-size:14px;font-weight:500;line-height:1.4}
+.explore-setting small{display:block;margin-top:4px;font-size:11px;line-height:1.5;color:#63756c}
+.explore-setting select{min-height:44px;max-width:145px;padding:10px 30px 10px 12px;border:1px solid #344c5333;border-radius:6px;background:#fff9ee;color:#344c53;font:500 12px/1.4 'Segoe UI',Arial,sans-serif;cursor:pointer}
+.island-dialog .explore-sound-toggle{display:flex;align-items:center;justify-content:center;gap:9px;min-width:80px;min-height:44px;padding:8px 12px;border:1px solid #344c5333;border-radius:6px;background:#fff9ee;color:#344c53;font-size:12px}
+.explore-sound-toggle span{display:block;width:8px;height:8px;border-radius:50%;background:#a0a69b}
+.explore-sound-toggle[aria-checked=true] span{background:#3a7861}
+.island-dialog .explore-setting :focus-visible{outline:3px solid #965a3d;outline-offset:3px}
+@media(max-width:700px){
+ .island-app .island-header nav.explore-navigation{top:calc(16px + env(safe-area-inset-top));right:calc(16px + env(safe-area-inset-right));width:44px;height:auto;min-height:0;gap:8px;padding:0}
+ .island-app .place-caption{max-width:calc(100% - 96px)}
+ .explore-menu-links{gap:0 18px;margin-top:0}
+ .island-dialog .explore-menu-links button{font-size:14px}
+ .explore-setting{gap:12px}.explore-setting small{font-size:10px}.explore-setting select{max-width:130px}
+}
+@media(prefers-reduced-motion:reduce){.island-header .explore-navigation .explore-nav-button{transition:none}}

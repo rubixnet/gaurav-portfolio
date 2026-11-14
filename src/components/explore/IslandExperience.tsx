@@ -2,11 +2,13 @@
 
 import dynamic from 'next/dynamic';
 import { ActionPrompt } from './ActionPrompt';
+import { ExploreNavigation } from './ExploreNavigation';
+import { ExploreMenu } from './ExploreMenu';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { portfolioLinks, portfolioProjects } from '../portfolio-data';
 import { findPath, onStairs, placeFloor, PLACES, routeTo, type PlaceId, type Point, type WorldState } from './world-config';
 import { WorldAudio } from './WorldAudio';
-import { PORTFOLIO_SECTIONS, PortfolioPanel, SECTION_TITLES, type PortfolioSection } from './PortfolioPanels';
+import { PortfolioPanel, SECTION_TITLES, type PortfolioSection } from './PortfolioPanels';
 
 const ExplorerScene=dynamic(()=>import('./ExplorerScene'),{ssr:false,loading:()=> <div className="boot-message">Drawing the shoreline…</div>});
 const DEFAULT_INTRO='I am Gaurav Bhaturkar, a web developer and game developer. I am a first-year Electronics and Telecommunication Engineering student at Shri Sant Gajanan Maharaj College of Engineering, Shegaon. I enjoy creating interactive experiences, traveling, music, badminton, and cricket.';
@@ -14,7 +16,7 @@ const DEFAULT_INTRO='I am Gaurav Bhaturkar, a web developer and game developer. 
 export default function IslandExperience() {
  const state=useRef<WorldState>({position:[0,31],floor:0,path:[],keys:new Set(),joystick:[0,0],started:false,paused:false,reducedMotion:false,mainDoorOpen:0,balconyDoorOpen:0});
  const [started,setStarted]=useState(false),[ready,setReady]=useState(false),[failed,setFailed]=useState(false);
- const [place,setPlace]=useState<PlaceId>('arrival'),[panel,setPanel]=useState<PlaceId|PortfolioSection|'map'|'help'|null>(null);
+ const [place,setPlace]=useState<PlaceId>('arrival'),[panel,setPanel]=useState<PlaceId|PortfolioSection|'map'|'help'|'menu'|null>(null);
  const [quality,setQuality]=useState<'high'|'balanced'>('balanced'),[sound,setSound]=useState(false),[reduced,setReduced]=useState(false);
  const profile=({college:'Shri Sant Gajanan Maharaj College of Engineering, Shegaon',branch:'Electronics and Telecommunication Engineering',intro:DEFAULT_INTRO});
  const [changing,setChanging]=useState(false);
@@ -121,7 +123,7 @@ export default function IslandExperience() {
    <WorldAudio enabled={sound} state={state}/>
    <header className="island-header">
      <a className="island-brand" href="#" onClick={e=>{e.preventDefault();setStarted(false);setSeated(false);setDeskSeated(false);setPanel(null);state.current.seated=false;state.current.deskSeated=false;state.current.keys.clear();state.current.joystick=[0,0];state.current.path=[];state.current.position=[0,31];state.current.floor=0;}} aria-label="Return to island welcome"><img className="brand-symbol" src="/branding/gaurav-symbol.png" width={52} height={52} alt="Gaurav logo" /></a>
-     <nav aria-label="Main navigation"><button className="map-trigger" title="Open the map and teleport to a location (M)" onClick={()=>setPanel('map')}>Map <span>⌖</span></button><a href={portfolioLinks.github} target="_blank" rel="noreferrer">GitHub ↗</a><button className="controls-trigger" onClick={()=>setPanel('help')} aria-label="Open controls" title="View movement controls and keyboard shortcuts">?</button></nav>
+     <ExploreNavigation active={panel} onMenu={()=>setPanel('menu')} onMap={()=>setPanel('map')}/>
    </header>
 
    {!started&&!failed&&<section className="welcome-copy">
@@ -129,8 +131,7 @@ export default function IslandExperience() {
      <h1>Gaurav’s<br/><em>little world.</em></h1>
      <aside className="desktop-recommendation"><strong>Please view on desktop</strong><span>This portfolio is designed for desktop. Open it on a laptop or computer for the full 3D experience.</span></aside>
      <button className="primary-button" disabled={!ready} onClick={()=>viewChange(()=>{setStarted(true);state.current.path=findPath(state.current.position,[0,20]);})}>{ready?'Start Exploring':'Preparing your island…'} <span>↗</span></button>
-     <button className="text-button" disabled={!ready} onClick={()=>travel('music')}>Visit the listening room <span>→</span></button>
-   </section>}
+      </section>}
 
    {!ready&&!failed&&<div className="loading-island" role="status"><i/> Setting the scene…</div>}
    {failed&&<section className="welcome-copy render-error"><p className="eyebrow">YOUR CONNECTION TO THE ISLAND</p><h1>The projects<br/>are still here.</h1><p>This browser couldn’t start the 3D world. Explore the projects and profile from the menu.</p><button className="primary-button" onClick={()=>setPanel('map')}>Open portfolio ↗</button></section>}
@@ -145,17 +146,17 @@ export default function IslandExperience() {
    {started&&nearDesk&&!deskSeated&&!panel&&<ActionPrompt className="seat-button" onClick={toggleDesk} label="Use computer"/>}
 
    {seated&&<nav className="balcony-project-links" aria-label="Balcony projects"><a href={portfolioProjects[0].href} target="_blank" rel="noreferrer">Echo Music ↗</a><a href={portfolioProjects[1].href} target="_blank" rel="noreferrer">Badminton ↗</a></nav>}
-   <footer className="island-footer" aria-label="World settings"><div><button className="sound-button" title="Turn ambient ocean sounds and footsteps on or off" onClick={()=>setSound(!sound)} aria-pressed={sound}>{sound?'◖))':'◖×'} <span>SOUND {sound?'ON':'OFF'}</span></button><button title="Switch between balanced performance and higher-quality shadows and effects" onClick={()=>setQuality(quality==='high'?'balanced':'high')} aria-label={`Graphics quality ${quality}. Click to change.`}>{quality==='high'?'HIGH':'BALANCED'}</button><button title="Cycle through automatic time, day, sunset, and night" onClick={()=>setTimeMode(mode=>({auto:'day',day:'sunset',sunset:'night',night:'auto'} as const)[mode])} aria-label={`Time of day: ${timeMode}. Change time`}>TIME: {timeMode.toUpperCase()}</button></div></footer>
+
    {started&&!seated&&!deskSeated&&!panel&&<div className="desktop-hint" aria-label="Movement guide"><div className="movement-keys" aria-hidden="true"><kbd className="key-up">W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div><p><strong>Move around</strong><br/><small>WASD or arrow keys</small><br/><small>Enter / E to interact</small></p></div>}
    {reduced&&<span className="motion-note">Reduced motion enabled</span>}
 
    {panel&&<div className="modal-scrim" onClick={e=>{if(e.target===e.currentTarget)setPanel(null);}}>
      <div className="island-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" ref={dialog}>
        <button className="dialog-close round-button" onClick={()=>setPanel(null)} aria-label="Close panel">×</button>
-       <p className="eyebrow">GAURAV’S WORLD / {panel==='map'?'ISLAND DIRECTORY':panel==='help'?'A FEW DIRECTIONS':'A LITTLE DISCOVERY'}</p>
-       <h2 id="dialog-title">{panel==='map'?'Where to next?':panel==='help'?'Go at your own pace.':panel==='gallery'?SECTION_TITLES.projects:SECTION_TITLES[panel as PortfolioSection]??PLACES.find(p=>p.id===panel)?.name}</h2>
-       {panel==='balcony'?<><p>A quiet spot above the garden, with the ocean around the island. The sliding doors open as you approach.</p><button className="primary-button" onClick={()=>travel('gallery')}>Back to the creative loft ↗</button></>:['about','skills','projects','education','achievements','gallery'].includes(panel)?<PortfolioPanel section={panel==='gallery'?'projects':panel as PortfolioSection} profile={profile}/>:panel==='map'?<>
-         <p>Choose a location to teleport there instantly.</p><div className="map-sections">{PORTFOLIO_SECTIONS.map(section=><button key={section.id} onClick={()=>setPanel(section.id)}>{section.label}</button>)}</div>
+       <p className="eyebrow">GAURAV’S WORLD / {panel==='menu'?'MENU':panel==='map'?'ISLAND DIRECTORY':panel==='help'?'A FEW DIRECTIONS':'A LITTLE DISCOVERY'}</p>
+       <h2 id="dialog-title">{panel==='menu'?'Your portfolio guide':panel==='map'?'Where to next?':panel==='help'?'Go at your own pace.':panel==='gallery'?SECTION_TITLES.projects:SECTION_TITLES[panel as PortfolioSection]??PLACES.find(p=>p.id===panel)?.name}</h2>
+       {panel==='menu'?<ExploreMenu onSelect={setPanel} sound={sound} onSound={setSound} quality={quality} onQuality={setQuality} time={timeMode} onTime={setTimeMode}/>:panel==='balcony'?<><p>A quiet spot above the garden, with the ocean around the island. The sliding doors open as you approach.</p><button className="primary-button" onClick={()=>travel('gallery')}>Back to the creative loft ↗</button></>:['about','skills','projects','education','achievements','gallery'].includes(panel)?<PortfolioPanel section={panel==='gallery'?'projects':panel as PortfolioSection} profile={profile}/>:panel==='map'?<>
+         <p>Choose a location to teleport there instantly.</p>
          <div className="destination-list">{PLACES.map(p=><button key={p.id} onClick={()=>failed?setPanel(p.id):travel(p.id)}><span>{p.icon}</span><b>{p.name}</b><span>↗</span></button>)}</div>
          <div className="direct-links">{portfolioProjects.map(p=><a key={p.id} href={p.href} target="_blank" rel="noreferrer">{p.title} ↗</a>)}<a href={portfolioLinks.github} target="_blank" rel="noreferrer">GitHub ↗</a><a href={portfolioLinks.x} target="_blank" rel="noreferrer">X ↗</a></div>
        </>:panel==='help'?<>
