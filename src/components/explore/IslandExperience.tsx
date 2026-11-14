@@ -128,7 +128,6 @@ export default function IslandExperience() {
      <p className="eyebrow"><span/> GAURAV BHATURKAR</p>
      <h1>Gaurav’s<br/><em>little world.</em></h1>
      <aside className="desktop-recommendation"><strong>Please view on desktop</strong><span>This portfolio is designed for desktop. Open it on a laptop or computer for the full 3D experience.</span></aside>
-     <p className="welcome-description">Web developer and game developer.<br/>Inspired by travel, music, and play.</p>
      <button className="primary-button" disabled={!ready} onClick={()=>viewChange(()=>{setStarted(true);state.current.path=findPath(state.current.position,[0,20]);})}>{ready?'Start Exploring':'Preparing your island…'} <span>↗</span></button>
      <button className="text-button" disabled={!ready} onClick={()=>travel('music')}>Visit the listening room <span>→</span></button>
    </section>}
