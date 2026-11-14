@@ -1,0 +1,32 @@
+{
+  "name": "gaurav-world-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "assets:models": "node scripts/generate-world-assets.mjs",
+    "assets:textures": "node scripts/generate-world-textures.mjs",
+    "assets:sunset": "node scripts/generate-sunset-assets.mjs",
+    "check:sunset": "node --experimental-strip-types scripts/check-sunset-assets.mjs",
+    "check:navigation": "node --experimental-strip-types scripts/check-world-routes.mjs",
+    "check:camera": "node --experimental-strip-types scripts/check-interior-camera.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "10.7.9",
+    "@react-three/fiber": "9.8.2",
+    "gsap": "3.15.1",
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/three": "0.187.0",
+    "typescript": "latest"
+  }
+}
