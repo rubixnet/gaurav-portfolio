@@ -66,3 +66,13 @@
  .island-app .island-footer button{min-width:0;white-space:nowrap}
  .island-app .joystick{bottom:calc(88px + env(safe-area-inset-bottom))}
 }
+
+/* Keep mobile header controls optically aligned and equally sized. */
+@media(max-width:700px),(pointer:coarse) and (max-height:500px) and (max-width:900px){
+ .island-app .island-header{padding:calc(14px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) 14px calc(16px + env(safe-area-inset-left));align-items:center}
+ .island-header .island-brand{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;flex:none;overflow:hidden;border-radius:50%;gap:0}
+ .island-header .island-brand .brand-symbol{width:56px;height:56px;max-width:none;transform:none}
+ .island-app .island-header nav{height:44px;min-height:44px;display:flex;align-items:center;padding:0;margin:0;border:0;background:transparent}
+ .island-app .island-header .controls-trigger{display:grid;place-items:center;box-sizing:border-box;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border-radius:50%;font-size:21px;line-height:1;margin:0}
+ .island-app .island-header .map-trigger,.is-seated .island-header .map-trigger{top:calc(70px + env(safe-area-inset-top))!important;right:calc(16px + env(safe-area-inset-right));margin:0}
+}
