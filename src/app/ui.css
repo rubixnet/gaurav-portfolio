@@ -8,9 +8,61 @@
 .island-app .seat-button{left:50%;right:auto;transform:translateX(-50%);bottom:100px;max-width:320px;z-index:5}.island-app .interaction-button{max-width:340px;bottom:100px}
 .island-dialog{border-radius:14px;scrollbar-width:thin;scrollbar-color:#a0aaa0 transparent}.island-dialog p{font-size:14px;line-height:1.75}.island-dialog .eyebrow{letter-spacing:.16em}.island-dialog .dialog-close{width:44px;height:44px;min-height:44px;display:grid;place-items:center;line-height:1;padding:0;background:#dfd9c733}.island-dialog .primary-button{min-height:48px;font-size:14px;border-radius:8px}.island-dialog .contact-monogram{margin:20px auto 28px;width:100px;height:100px;font-size:76px}.contact-links a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;font-size:15px;overflow-wrap:anywhere}.map-sections button{font-size:13px;min-height:44px;border-radius:8px}.destination-list button{min-height:56px;transition:background-color 150ms ease-out}.interest-tags span{font-size:12px}.island-dialog .story-card,.island-dialog .education-card{border-radius:10px}.balcony-project-links a{border-radius:8px;min-height:46px;font-size:13px}.island-footer button{font-weight:500}.controls-trigger{transition:background-color 150ms ease-out}
 @media(max-width:700px){.island-app .action-prompt{min-height:48px;padding:12px 14px!important;gap:8px;font-size:13px;max-width:calc(100% - 138px)}.island-app .action-prompt kbd{display:none}.island-app .action-prompt .action-label{display:block}.island-app .action-prompt svg{width:16px;height:16px}.island-app .seat-button,.island-app .interaction-button{left:auto;right:16px;bottom:calc(103px + env(safe-area-inset-bottom));transform:none}.island-dialog p{font-size:15px}.island-dialog .contact-monogram{width:76px;height:76px;font-size:58px;margin:12px auto 20px}.island-dialog{border-radius:12px}.balcony-project-links{bottom:calc(167px + env(safe-area-inset-bottom))}}
-@media(max-height:500px) and (max-width:900px){.island-app .seat-button,.island-app .interaction-button{bottom:85px;left:auto;right:20px;transform:none}}
+@media(pointer:coarse) and (max-height:500px) and (max-width:900px){.island-app .seat-button,.island-app .interaction-button{bottom:85px;left:auto;right:20px;transform:none}}
 @media(prefers-reduced-motion:reduce){.island-app .action-prompt,.destination-list button,.controls-trigger{transition:none}}
 
 /* Symbol-only portfolio identity. */
 .island-brand .brand-symbol{display:block;width:52px;height:52px;object-fit:contain;flex-shrink:0}
 @media(max-width:600px){.island-brand .brand-symbol{width:44px;height:44px}}
+
+/* Right-handed touch controls and a compact desktop recommendation. */
+.desktop-recommendation{display:none}
+@media(max-width:700px),(pointer:coarse) and (max-height:500px) and (max-width:900px){
+ .island-app .joystick{left:auto;right:calc(20px + env(safe-area-inset-right))}
+ .island-app .action-prompt.seat-button,.island-app .action-prompt.interaction-button{left:calc(16px + env(safe-area-inset-left));right:auto;transform:none;max-width:calc(100% - 140px)}
+ .balcony-project-links{left:calc(16px + env(safe-area-inset-left));right:auto;max-width:calc(100% - 32px);flex-wrap:wrap}
+ .desktop-recommendation{display:flex;flex-direction:column;gap:4px;margin:0 0 18px;padding:11px 14px;max-width:330px;border:1px solid #f4d4b640;border-left:2px solid #d9ae79;border-radius:8px;background:#203740e8;color:#fff0d7;text-shadow:none}
+ .desktop-recommendation strong{font-size:12px;line-height:1.4;font-weight:600;letter-spacing:.01em}
+ .desktop-recommendation span{font-size:11px;line-height:1.5;color:#eadcc8}
+}
+@media(pointer:coarse) and (max-height:500px) and (max-width:900px){.desktop-recommendation{margin-bottom:10px;padding:8px 12px}.desktop-recommendation span{display:none}}
+
+/* Mobile layout: preserve clear space for the scene and touch controls. */
+@media(max-width:700px){
+ .welcome-copy{max-height:calc(100dvh - 190px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:4px 2px 8px}
+ .desktop-recommendation{max-width:100%;margin:0 0 16px;padding:12px 14px}
+ .desktop-recommendation strong{font-size:14px;line-height:1.4}
+ .desktop-recommendation span{font-size:12px;line-height:1.55}
+ .island-dialog{max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;overflow-x:hidden;overflow-wrap:anywhere}
+ .island-dialog .help-grid,.island-dialog .portfolio-projects,.island-dialog .skill-cards{grid-template-columns:minmax(0,1fr)}
+ .island-dialog img{max-width:100%;height:auto}
+ .island-dialog .dialog-close{position:sticky;top:0;float:right;margin-top:-48px;z-index:3;background:#f4e9d7;border:1px solid #344c5340}
+ .island-dialog .destination-list button{min-width:0}.island-dialog .destination-list button>b{min-width:0;text-align:left}
+ .island-dialog .direct-links{flex-wrap:wrap;gap:8px 16px}
+ .mobile-computer .monitor-os header,.mobile-computer .monitor-os footer{flex-wrap:wrap}
+ .mobile-computer .monitor-os nav{position:sticky;top:68px;background:#112731;z-index:1}
+ .mobile-computer .os-connect a{overflow-wrap:anywhere;min-width:0}
+ .balcony-project-links{display:flex;gap:8px}
+ .balcony-project-links a{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;max-width:100%;font-size:12px}
+}
+@media(pointer:coarse) and (max-height:500px) and (max-width:900px){
+ .welcome-copy{top:76px;bottom:76px;max-height:none;overflow-y:auto;overscroll-behavior:contain;padding:4px 4px 8px;max-width:360px}
+ .welcome-copy h1{font-size:30px;margin-bottom:10px}
+ .desktop-recommendation{margin-bottom:12px;padding:9px 12px}
+ .desktop-recommendation span{display:block;font-size:11px}
+ .desktop-recommendation strong{font-size:12px}
+ .desktop-hint{display:none}
+}
+
+@media(max-width:700px){
+ .island-dialog .dialog-close{float:none;position:absolute;top:14px;right:14px;margin:0}
+ .island-dialog{position:relative;scroll-padding-top:66px}
+ .island-dialog .map-sections{display:flex;flex-wrap:wrap}
+ .island-dialog .map-sections button{flex:1 1 120px;min-height:44px}
+ .mobile-computer .monitor-os nav{position:static}
+ .mobile-computer .monitor-os header{position:sticky;top:0}
+ .mobile-computer .monitor-os footer{gap:8px;padding:12px 16px}
+ .mobile-computer .monitor-os button,.mobile-computer .monitor-os a{touch-action:manipulation}
+ .island-app .island-footer button{min-width:0;white-space:nowrap}
+ .island-app .joystick{bottom:calc(88px + env(safe-area-inset-bottom))}
+}
